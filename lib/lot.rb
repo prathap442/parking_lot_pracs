@@ -1,21 +1,26 @@
+=begin
+-    
+    
+=end
+
 class Lot
-  def initialize(info = {})
-    @lot_number = "12344"
-    @number_of_floors = info[:number_of_floors]
-    @lots_in_floor = info[:lots_in_floor]
-
-    @lot_structure_design = {}
-    @number_of_floors.times do |time_track_number|
-       @lot_structure_design[time_track_number] = []     
-    end
+  attr_accessor :lot_closed, :vehicle_info
+  def initialize(info)
+    @lot_closed = false || info[:lot_closed]
+    @vehicle_info = info[:vehicle] || Vehicle.new
+    @floor_id = info[:floor_id]
+    @lot_identity = lot_id_generator
   end
 
-  def lot_structure
-    @lot_structure_design[:floor_number] = []
+  def vehicle_info
+    @vehicle_info
   end
 
-  def set_number_of_lots_in_floor(lots_count,floor_number)
-    @lots_count = lots_count
-    @floor_number = floor_number 
+  def close_lot
+    @lot_closed = true
+  end
+
+  def lot_id_generator
+    "lot_id_#{Time.now.to_s}" + Random.rand(984598342345)
   end
 end
