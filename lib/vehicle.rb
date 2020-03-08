@@ -9,21 +9,21 @@
 
 class Vehicle
 
-  PERHOUR_FEES = 8.0
   attr_accessor :vehicle_number, :vehicle_floor,:vehicle_color
   def initialize(info={})
     @vehicle_number = info[:vehicle_number]     
     @vehicle_color = info[:vehicle_color]
     @vehicle_intime = Time.now
     @vehicle_outtime = @vehicle_intime
+    @vehicle_per_hour_basis_charge = info[:fees_per_hour] #needs to send the fee at the time of the Allocation of the vehicle
+    @lot_identity = info[:lot_identity]
   end
 
-  def set_vehicle_outtime
+  def checkout
     @vehicle_outtime = Time.now
   end
-  
-  def calculate_amount
-    (vehicle_outtime.hours - vehicle_intime.hour)*(PERHOUR_FEES)
-  end
 
+  def lot_identity
+    @lot_identity
+  end
 end

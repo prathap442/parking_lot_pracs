@@ -1,12 +1,21 @@
+PARKING_LOTS = []
+FLOORS = []
+LOTS = []
+VEHICLES = []
 class ParkingLot
 
   def initialize(info = {})
+    @name = info[:parking_lot_name]
     @parking_lot_number = generate_lot_number
     @floors = []
     @charges_per_hour = info[:charges_per_hour] || 10
     @floors_count = info[:floors_count]
     @lots_per_floor = info[:lots_per_floor] || 10
     set_floors_for_lot
+  end
+
+  def floors
+    @floors
   end
 
   def set_numbers_of_floors(floors_count)
@@ -28,10 +37,11 @@ class ParkingLot
 
   def set_floors_for_lot
     @floors_count.times do |floor_number|
-    @floors.push(Floor.new({
-      parking_lot_id: @parking_lot_number,
-      lots_per_floor: @lots_per_floor
-    })
+      @floors.push(Floor.new({
+        parking_lot_id: @parking_lot_number,
+        lots_per_floor: @lots_per_floor
+      }))
+    end
   end
 
 end
